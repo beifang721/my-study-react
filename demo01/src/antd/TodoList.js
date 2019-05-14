@@ -9,6 +9,7 @@ export default class TodoList extends Component {
     this.state = store.getState();
     this.handleChangeInput = this.handleChangeInput.bind(this);
     this.handleStoreChange = this.handleStoreChange.bind(this);
+    this.handleAddTodoItem = this.handleAddTodoItem.bind(this);
     store.subscribe(this.handleStoreChange);
   }
   render() {
@@ -21,7 +22,12 @@ export default class TodoList extends Component {
             style={{ width: '300px', marginRight: '10px' }}
             onChange={this.handleChangeInput}
           />
-          <Button type="primary">提交</Button>
+          <Button 
+            type="primary"
+            onClick = {this.handleAddTodoItem}
+            >
+            提交
+          </Button>
         </div>
         <List
           size="small"
@@ -46,4 +52,11 @@ export default class TodoList extends Component {
   handleStoreChange() {
     this.setState(store.getState())
   }
+  handleAddTodoItem() {
+    const action = {
+      type: 'add_todo_item',
+    }
+    store.dispatch(action);
+  }
 }
+ 
