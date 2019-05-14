@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 export default class TodoItem extends Component {
+    shouldComponentUpdate() {
+
+    }
     render() {
+        // JSX -> JS对象 -> 真实DOM
         return (
             <div>
                 <ul>
