@@ -9,6 +9,9 @@ export default class TodoList extends Component {
     this.state = store.getState();
     this.handleChangeInput = this.handleChangeInput.bind(this);
     this.handleStoreChange = this.handleStoreChange.bind(this);
+    this.handleBtnClick = this.handleBtnClick.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    /// 订阅store改变
     store.subscribe(this.handleStoreChange);
   }
   render() {
@@ -21,16 +24,16 @@ export default class TodoList extends Component {
             style={{ width: '300px', marginRight: '10px' }}
             onChange={this.handleChangeInput}
           />
-          <Button type="primary">提交</Button>
+          <Button type="primary" onClick={this.handleBtnClick}>提交</Button>
         </div>
         <List
           size="small"
           style={{ width: '400px', marginTop: '10px' }}
-          header={<div>Header</div>}
-          footer={<div>Footer</div>}
+          // header={<div>Header</div>}
+          // footer={<div>Footer</div>}
           bordered
           dataSource={this.state.list}
-          renderItem={item => <List.Item>{item}</List.Item>}
+          renderItem={(item,index) => <List.Item onClick={this.handleDeleteClick}>{item}</List.Item>}
         />
       </div>
     )
@@ -45,5 +48,14 @@ export default class TodoList extends Component {
   }
   handleStoreChange() {
     this.setState(store.getState())
+  }
+  handleBtnClick() {
+    const action = {
+      type: 'add_todo_item'
+    }
+    store.dispatch(action);
+  }
+  handleDeleteClick(index) {
+    console.log(index)
   }
 }
