@@ -12,6 +12,7 @@ export default class TodoList extends Component {
     this.handleBtnClick = this.handleBtnClick.bind(this);
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
     /// 订阅store改变
+
     store.subscribe(this.handleStoreChange);
   }
   render() {
@@ -24,7 +25,12 @@ export default class TodoList extends Component {
             style={{ width: '300px', marginRight: '10px' }}
             onChange={this.handleChangeInput}
           />
-          <Button type="primary" onClick={this.handleBtnClick}>提交</Button>
+          <Button 
+            type="primary"
+            onClick = {this.handleAddTodoItem}
+            >
+            提交
+          </Button>
         </div>
         <List
           size="small"
@@ -58,4 +64,6 @@ export default class TodoList extends Component {
   handleDeleteClick(index) {
     console.log(index)
   }
+
 }
+ 
